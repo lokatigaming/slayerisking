@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLAYER IS KING | Path of Exile Build Hub</title>
+    <style>
+        /* Minimalist Dark Theme Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0d0e12;
+            color: #e2e8f0;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* Top Bar Header */
+        header {
+            background-color: #13151a;
+            border-bottom: 2px solid #e93d3d;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: #e93d3d;
+        }
+
+        .external-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .external-links a:hover {
+            color: #e93d3d;
+        }
+
+        /* 3-Column Layout: Sidebar | Main Content | Twitch Stream Container */
+        .wrapper {
+            max-width: 1600px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr 400px;
+            gap: 20px;
+        }
+
+        /* Left Column: Build Selector Tabs */
+        .sidebar {
+            background-color: #13151a;
+            border-radius: 6px;
+            padding: 15px;
+            height: fit-content;
+            border: 1px solid #1e293b;
+        }
+
+        .sidebar h3 {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            padding-left: 10px;
+        }
+
+        .tab-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            background-color: #1e222b;
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            background-color: #e93d3d;
+            color: #fff;
+        }
+
+        /* Center Column: Dynamic Wiki Content */
+        .main-content {
+            background-color: #13151a;
+            border-radius: 6px;
+            padding: 35px;
+            border: 1px solid #1e293b;
+            height: fit-content;
+        }
+
+        .build-pane {
+            display: none;
+        }
+
+        .build-pane.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .tagline {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+
+        /* PoB Copy Box Block */
+        .pob-box {
+            background-color: #1e222b;
+            border-left: 4px solid #e93d3d;
+            padding: 15px 20px;
+            border-radius: 0 4px 4px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .pob-info span {
+            display: block;
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .pob-info p {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .copy-btn {
+            background-color: #e93d3d;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #c82c2c;
+        }
+
+        /* Wiki Resource Sections */
+        .section-title {
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #fff;
+            margin: 25px 0 15px 0;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 8px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #e93d3d;
+        }
+
+        /* Right Column: Twitch Embed Card */
+        .twitch-sidebar {
+            background-color: #13151a;
+            border-radius: 6px;
+            padding: 15px;
+            border: 1px solid #1e293b;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .twitch-sidebar h3 {
+            font-size: 0.85rem;
+            color: #a78bfa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Pulse light indicator for stream status layout */
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #ef4444;
+        }
+
+        .responsive-video-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* Fixed 16:9 Aspect Ratio */
+            border-radius: 4px;
+            background-color: #000;
+        }
+
+        .responsive-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Responsive Breakpoints for Tablets and Mobile Devices */
+        @media (max-width: 1100px) {
+            .wrapper {
+                grid-template-columns: 250px 1fr;
+            }
+            .twitch-sidebar {
+                grid-column: span 2;
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wrapper {
+                grid-template-columns: 1fr;
+            }
+            .sidebar, .twitch-sidebar {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header>
+        <div class="logo">Slayer<span> is King</span></div>
+        <div class="external-links">
+            <a href="https://pathofexile.com" target="_blank" rel="noopener">PoE Official</a>
+            <a href="https://pobb.in" target="_blank" rel="noopener">PoBB.in</a>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        
+        <!-- Left Side: Build Selector Buttons -->
+        <div class="sidebar">
+            <h3>Slayer Build Guides</h3>
+            <button class="tab-btn active" onclick="switchBuild(event, 'flicker')">Flicker Strike</button>
+            <button class="tab-btn" onclick="switchBuild(event, 'elehit')">Elemental Hit</button>
+            <button class="tab-btn" onclick="switchBuild(event, 'cyclone')">Cyclone Physical</button>
+            <button class="tab-btn" onclick="switchBuild(event, 'molten')">Molten Strike</button>
+        </div>
+
+        <!-- Center Side: Dynamic Content Engine -->
+        <div class="main-content">
+            
+            <!-- FLICKER STRIKE WIKI TAB -->
+            <div id="flicker" class="build-pane active">
+                <h1>Flicker Strike Slayer</h1>
+                <p class="tagline">Ultra-fast map clearing using Frenzy Charge generation mechanisms.</p>
+                
+                <div class="pob-box">
+                    <div class="pob-info">
+                        <span>Community Pastebin</span>
+                        <p>Flicker Strike Endgame Progress Setup</p>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('https://pobb.in/example-flicker')">Copy POB</button>
+                </div>
+
+                <h3 class="section-title">Ascendancy Priority</h3>
+                <ul>
+                    <li><strong>Endless Hunger</strong> — Gives life leech immunity and raw recovery throughput.</li>
+                    <li><strong>Brutal Fervour</strong> — Grants vital "Overleech" to sustain Flicker map movement safely.</li>
+                    <li><strong>Master Surgeon</strong> — Boosts Base Critical Strike parameters based on charges.</li>
+                </ul>
+            </div>
+
+            <!-- ELEMENTAL HIT WIKI TAB -->
+            <div id="elehit" class="build-pane">
+                <h1>Elemental Hit of the Spectrum</h1>
+                <p class="tagline">Ranged Slayer variant scaling elemental damage scaling vectors via crit multi.</p>
+                
+                <div class="pob-box">
+                    <div class="pob-info">
+                        <span>Community Pastebin</span>
+                        <p>Ele Hit League Start To Red Maps</p>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('https://pobb.in/example-elehit')">Copy POB</button>
+                </div>
+
+                <h3 class="section-title">Core Mechanics</h3>
+                <ul>
+                    <li>Scales directly with added flat damage modifiers on bows and quivers.</li>
+                </ul>
+            </div>
+
+            <!-- CYCLONE WIKI TAB -->
+            <div id="cyclone" class="build-pane">
+                <h1>Physical Cyclone Slayer</h1>
+                <p class="tagline">Classic spin-to-win infrastructure focusing on impale mechanics.</p>
+                
+                <div class="pob-box">
+                    <div class="pob-info">
+                        <span>Community Pastebin</span>
+                        <p>Shockwave Pure Physical Cyclone Setup</p>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('https://pobb.in/example-cyclone')">Copy POB</button>
+                </div>
+            </div>
+
+            <!-- MOLTEN STRIKE WIKI TAB -->
+            <div id="molten" class="build-pane">
+                <h1>Zenith Molten Strike</h1>
+                <p class="tagline">High-tier boss killing configuration utilizing projectile scaling arrays.</p>
+                
+                <div class="pob-box">
+                    <div class="pob-info">
+                        <span>Community Pastebin</span>
+                        <p>Molten Strike Iron Reflexes Tank Endgame</p>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('https://pobb.in/example-molten')">Copy POB</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side: Twitch Live Stream Embed Panel -->
+        <div class="twitch-sidebar">
+            <h3><span class="live-dot"></span> Stream: lokati_gaming</h3>
+            <div class="responsive-video-container">
+                <!-- IMPORTANT: Change parent value from 'your-netlify-app-name.netlify.app' to your exact free netlify site URL once published -->
+                <iframe 
+                    src="https://player.twitch.tv/?channel=lokati_gaming&parent=localhost&parent=127.0.0.1&parent=your-netlify-app-name.netlify.app" 
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Dynamic Tab Component Logic -->
+    <script>
+        function switchBuild(evt, buildName) {
+            var i, panes, tablinks;
+            panes = document.getElementsByClassName("build-pane");
+            for (i = 0; i < panes.length; i++) {
+                panes[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(buildName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function copyText(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    alert("PoB link copied to clipboard!");
+                }).catch(function() {
+                    fallbackCopyText(text);
+                });
+            } else {
+                fallbackCopyText(text);
+            }
+        }
+
+        function fallbackCopyText(text) {
+            var textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                alert("PoB link copied to clipboard!");
+            } catch (err) {
+                alert("Copy failed. Please copy manually: " + text);
+            }
+            document.body.removeChild(textarea);
+        }
+    </script>
+
+</body>
+</html>
